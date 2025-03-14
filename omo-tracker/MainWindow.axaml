@@ -16,12 +16,15 @@
             Grid.Column="0"
             >
             <MenuItem
+                IsEnabled="False"
                 Header="File">
             </MenuItem>
             <MenuItem
+                IsEnabled="False"
                 Header="Edit">
             </MenuItem>
             <MenuItem
+                IsEnabled="False"
                 Header="View">
             </MenuItem>
             <MenuItem
@@ -136,6 +139,7 @@
                 </Grid>
             </TabItem>
             <TabItem
+                IsEnabled="False"
                 Header="Singleplayer games">
                 <Grid 
                     ShowGridLines="False"
@@ -144,6 +148,7 @@
                 </Grid>
             </TabItem>
             <TabItem
+                IsEnabled="False"
                 Header="Multiplayer games">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                     <WrapPanel>

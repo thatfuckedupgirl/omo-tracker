@@ -32,6 +32,8 @@ public partial class MainWindow : Window {
         return ret.GetAwaiter().GetResult();
     }
     private void TopLevel_OnOpened(object? sender, EventArgs e) {
+        Console.WriteLine(sender);
+        Console.WriteLine(e);
         Task.Run(()=>AsH.Setup());
     }
     private void SufficeProfileUiUpdateAsh(object? sender, EventArgs e) {
@@ -44,11 +46,7 @@ public partial class MainWindow : Window {
     private void SufficeUiUpdate(object? sender, EventArgs e) {
         var uidata = AsH.GetUiData();
         Dispatcher.UIThread.InvokeAsync(() => {
-                                            if (uidata.isholding) {
-                                                StartButton.Content = "Stop holding";
-                                            } else {
-                                                StartButton.Content = "Start holding";
-                                            }
+                                            StartButton.Content = uidata.isholding? "Stop holding" : "Start holding";
                                             ToDrinkBox.IsEnabled = uidata.isholding;
                                             DrinkButton.IsEnabled = uidata.isholding;
                                             watervol.Text = $"{uidata.water}ml";
@@ -74,9 +72,9 @@ public partial class MainWindow : Window {
                                                 return;
                                             }
                                             foreach (var history in historydata) {
-                                                var TS = history.timestart - history.timeend;
+                                                var TS =  history.timeend - history.timestart;
                                                 int hours = TS == null? 0 : (int)TS.Value.TotalHours;
-                                                int mins = TS == null? 0 : (int)TS.Value.Minutes;
+                                                int mins = TS?.Minutes ?? 0;
                                                 HistoryBox.Items.Add(new ListBoxItem() {
                                                                          Content =new HistoryBoxItem() {
                                                                              WaterImg = history.waterimg,
@@ -89,31 +87,44 @@ public partial class MainWindow : Window {
 
 
     private void ToDrinkBox_OnTextChanged(object? sender, TextChangedEventArgs e) {
+        Console.WriteLine(sender);
+        Console.WriteLine(e);
         int.TryParse(ToDrinkBox.Text ?? "0", out ToDrink);
     }
     private void ToDrinkBox_OnTextInput(object? sender, TextInputEventArgs e) {
         if (!int.TryParse(e.Text, out int todrink)) {
+            Console.WriteLine(todrink);
             e.Handled = true;    
         }
     }
     private void StartButton_OnClick(object? sender, RoutedEventArgs e) {
+        Console.WriteLine(sender);
+        Console.WriteLine(e);
         if (AsH._mainHoldng == null) { return; }
         if (AsH.IsActive()) { AsH._mainHoldng.StopHolding(); } else { AsH._mainHoldng.StartHold(); }
     }
     private void DrinkButton_OnClick(object? sender, RoutedEventArgs e) {
+        Console.WriteLine(sender);
+        Console.WriteLine(e);
         if (AsH._mainHoldng == null || AsH._mainHoldng.profile_.current == null) {
             return;
         }
         AsH._mainHoldng.profile_.current.Drink(ToDrink, false);
     }
     private void TopLevel_OnClosed(object? sender, EventArgs e) {
+        Console.WriteLine(sender);
+        Console.WriteLine(e);
         Profile.RequestUiUpdateProfile -= SufficeUiUpdate;
         HoldData.RequestUiUpdateHoldData -= SufficeUiUpdate;
     }
     private void Chpf_OnClick(object? sender, RoutedEventArgs e) {
-        Task.Run(()=>DataIO.ChangeOrCreateProfile());
+        Console.WriteLine(sender);
+        Console.WriteLine(e);
+        Task.Run(DataIO.ChangeOrCreateProfile);
     }
     private void MenuItem_OnClick(object? sender, RoutedEventArgs e) {
+        Console.WriteLine(sender);
+        Console.WriteLine(e);
         AboutWindow aboutWindow = new AboutWindow();
         aboutWindow.ShowDialog(this);
     }

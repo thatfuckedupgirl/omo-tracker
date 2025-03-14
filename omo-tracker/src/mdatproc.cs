@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
@@ -20,13 +19,13 @@ public class HoldData {
     [JsonInclude]
     public double mod{get; set;} = 1;
     [JsonInclude]
-    public double nonwater{get; set;} = 0;
+    public double nonwater{get; set;} 
     [JsonInclude]
     public DateTime? starttime {get; set;}
     [JsonInclude]
     public DateTime? endtime {get; set;}
     public static event EventHandler RequestUiUpdateHoldData  = delegate {};
-    private  DispatcherTimer? transfer = null;
+    private DispatcherTimer? transfer;
     public bool ison;
     public void Start() {
         transfer ??= new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.MaxValue, TransferOnTick);
@@ -62,7 +61,7 @@ public class Profile {
     [JsonInclude]
     public string nickname{get; set;} = "";
     [JsonInclude]
-    public HoldData? current{get; set;} = null;
+    public HoldData? current{get; set;} 
     [JsonInclude]
     public List<HoldData> history {get; set;} = [];
     public static event EventHandler RequestUiUpdateProfile = delegate {};
@@ -75,7 +74,7 @@ public class Profile {
     public void EndHoldData() {
         if (current != null) {
             current.Stop();
-            if ((current.endtime - current.starttime).Value.TotalMinutes > 1) { history.Add(current); }
+            if (((current.endtime - current.starttime)!).Value.TotalMinutes > 1) { history.Add(current); }
         }
         current = null;
         DataIO.SaveData(this);
@@ -104,19 +103,19 @@ public class MainHoldng(int profid) {
 }
 
 public class History {
-    public int water = 0;
-    public int nonwater = 0;
-    public DateTime? timestart = null;
-    public DateTime? timeend = null;
+    public int water;
+    public int nonwater;
+    public DateTime? timestart;
+    public DateTime? timeend;
     public Bitmap waterimg = DataIO.GetBitmap("res\\water\\wmt.bmp");
     public Bitmap nonwaterimg = DataIO.GetBitmap("res\\nonwater\\umt.bmp");
 }
 public class UiData {
-    public int water = 0;
-    public int nonwater = 0;
+    public int water;
+    public int nonwater;
     public Bitmap waterimg = DataIO.GetBitmap("res\\water\\wmt.bmp");
     public Bitmap nonwatrimg = DataIO.GetBitmap("res\\nonwater\\umt.bmp");
-    public bool isholding = false;
+    public bool isholding;
     public TimeSpan holdingtime = TimeSpan.FromSeconds(0);
 }
 
@@ -126,13 +125,13 @@ public class UiProfileData {
 }
 public static class AsH {
     public static List<Profile>? _allprofiles;
-    public static MainHoldng? _mainHoldng = null;
+    public static MainHoldng? _mainHoldng ;
     public static EventHandler RequestUiUpdateAsH = delegate {};
     public static EventHandler RequestProfileUiUpdateAsh = delegate {};
     public static EventHandler RequestHistoryUiUpdateAsh = delegate {};
 
     public static bool IsActive() {
-        bool ret = _mainHoldng?.profile_?.current?.ison ?? false;
+        bool ret = _mainHoldng?.profile_.current?.ison ?? false;
         return ret;
     }
     public static UiProfileData GetProfileUiData() {
@@ -165,8 +164,8 @@ public static class AsH {
     public static UiData GetUiData() {
         DateTime now = DateTime.Now;
         UiData uiData = new UiData {
-                                       water = (int)(_mainHoldng?.profile_?.current?.water ?? 0), 
-                                       nonwater = (int)(_mainHoldng?.profile_?.current?.nonwater ?? 0)
+                                       water = (int)(_mainHoldng?.profile_.current?.water ?? 0), 
+                                       nonwater = (int)(_mainHoldng?.profile_.current?.nonwater ?? 0)
                                    };
         uiData.waterimg = DataIO.GetBitmap(
                                            $"res\\water\\w{(uiData.water <= 0 ?
@@ -176,10 +175,10 @@ public static class AsH {
         uiData.nonwatrimg = DataIO.GetBitmap(
                                              $"res\\nonwater\\u{(uiData.nonwater <= 0 ? 
                                                                      "mt" : 
-                                                                     Math.Clamp((int)(((double)uiData.nonwater/_mainHoldng?.profile_?.size ?? 1000)*10), 1, 10)):00}.bmp"
+                                                                     Math.Clamp((int)(((double)uiData.nonwater/_mainHoldng?.profile_.size ?? 1000)*10), 1, 10)):00}.bmp"
                                              );
         uiData.isholding = IsActive();
-        uiData.holdingtime = (now - (_mainHoldng?.profile_?.current?.starttime ?? now));
+        uiData.holdingtime = (now - (_mainHoldng?.profile_.current?.starttime ?? now));
         return uiData;
     }
     public static void Setup(bool fromselector = false, int selid = 1) {
@@ -189,7 +188,6 @@ public static class AsH {
                     RequestUiUpdateAsH.Invoke(null, EventArgs.Empty);
                     RequestProfileUiUpdateAsh.Invoke(null, EventArgs.Empty);
                     RequestHistoryUiUpdateAsh.Invoke(null, EventArgs.Empty);
-                    return;
             } else { DataIO.ChangeOrCreateProfile(); }
         } catch (Exception e) {
             Console.WriteLine(e);
@@ -240,6 +238,7 @@ public static class DataIO {
                     ret = new Bitmap(stream);    
                 }
             } catch (Exception e) {
+                Console.WriteLine(e);
                 ret = GetBitmap("res\\ph.png");
             }
             return ret;
@@ -251,7 +250,7 @@ public static class DataIO {
     public static void SaveData(Profile profile) {
         try {
             if (!Directory.Exists("Profiles")) { Directory.CreateDirectory("Profiles"); }
-            string json = JsonSerializer.Serialize<Profile>(profile);
+            string json = JsonSerializer.Serialize(profile);
             File.WriteAllText($"Profiles/profile-q{profile.profid:00}.json", json);
         } catch (Exception e) {
             PrintDebug(e.Message);
@@ -303,7 +302,7 @@ public static class DataIO {
             throw;
         }
     }
-    public static List<int> GetAllProfids() {
+    private static List<int> GetAllProfids() {
         try {
             List<int> profids = [];
             if (!Directory.Exists($"Profiles")) { Directory.CreateDirectory($"Profiles"); }
