@@ -15,7 +15,7 @@ using MsBox.Avalonia.Enums;
 namespace omo_tracker.avc;
 
 public partial class ProfilesNewProfile : Window {
-    private bool manual = false;
+    private bool manual ;
     private List<Profile>? profiles;
     private int ind;
     public ProfilesNewProfile() {
@@ -71,6 +71,8 @@ public partial class ProfilesNewProfile : Window {
         SzTextBox.Text = profiles[ind].size.ToString();
     }
     private void Button_OnClick(object? sender, RoutedEventArgs e) {
+        Console.WriteLine(sender);
+        Console.WriteLine(e);
         SaveChangedProfile();
         if ( string.IsNullOrEmpty(nicknamebox.Text)) {
             nicknamebox.Foreground = Brushes.Red;
@@ -80,24 +82,31 @@ public partial class ProfilesNewProfile : Window {
             profiles.RemoveAt(profiles.Count-1);
         }
         manual = true;
-        Close((profiles, Math.Clamp((ind == -1 ? profiles.Count : ind+1), 1, profiles?.Count??1)));
-        
+        if (profiles != null) {
+            Close((profiles, Math.Clamp((ind == -1? profiles.Count : ind + 1), 1, profiles?.Count ?? 1)));
+        }
     }
     
     private void ToDrinkBox_OnTextChanged(object? sender, TextChangedEventArgs e) {
+        Console.WriteLine(sender);
+        Console.WriteLine(e);
         if (profiles == null) {return; }
         int.TryParse(SzTextBox.Text ?? "0", out int i );
+        Console.WriteLine(i);
         SaveChangedProfile();
     }
     private void ToDrinkBox_OnTextInput(object? sender, TextInputEventArgs e) {
         if (!int.TryParse(e.Text, out int todrink)) {
+            Console.WriteLine(todrink);
             e.Handled = true;    
         }
     }
     
     
     private async void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e) {
-        var topLevel = TopLevel.GetTopLevel(this); // Get the top-level window
+        Console.WriteLine(sender);
+        Console.WriteLine(e);
+        var topLevel = TopLevel.GetTopLevel(this);
         if (topLevel?.StorageProvider is { } storageProvider) {
             Task<IReadOnlyList<IStorageFile>> files = storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
                 {Title = "Select a file", AllowMultiple = false, FileTypeFilter = new[] 
@@ -110,6 +119,8 @@ public partial class ProfilesNewProfile : Window {
         SaveChangedProfile();
     }
     private void Window_OnClosing(object? sender, WindowClosingEventArgs e) {
+        Console.WriteLine(sender);
+        Console.WriteLine(e);
         if (profiles == null) {
             Avalonia.Threading.Dispatcher.UIThread.Post(() => {
                                                                 if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
@@ -135,11 +146,7 @@ public partial class ProfilesNewProfile : Window {
             profiles.Last().profid = DataIO.GetFreeProfid();
             profiles.Last().nickname = nicknamebox.Text ?? "";
             profiles.Last().pfpsrs = imgsrctextbox.Text ?? "";
-            if (SzTextBox.Text != "") {
-                profiles.Last().size = int.Parse(SzTextBox.Text ?? "1000");
-            } else {
-                profiles.Last().size = 1000;
-            }
+            profiles.Last().size = SzTextBox.Text != ""? int.Parse(SzTextBox.Text ?? "1000") : 1000;
              
         } else if (ind < profiles.Count) {
             profiles[ind].nickname = nicknamebox.Text??"";
@@ -151,7 +158,8 @@ public partial class ProfilesNewProfile : Window {
         }
     }
     private async void Delete_OnClick(object? sender, RoutedEventArgs e) {
-        
+        Console.WriteLine(sender);
+        Console.WriteLine(e);
         var result = await MessageBoxManager.GetMessageBoxStandard("Are you sure?", "Confirmation", ButtonEnum.YesNo).ShowAsync();
         if (result == ButtonResult.Yes) {
             if (profiles == null||ind < 0 || ind+1 > profiles.Count) { return; }
