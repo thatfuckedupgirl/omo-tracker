@@ -1,0 +1,74 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:omo_tracker.avc" >
+    <Design.PreviewWith>
+        <controls:HistoryBoxItem/>
+    </Design.PreviewWith>
+
+    <Style
+        Selector="controls|HistoryBoxItem" >
+        <!-- Set Defaults -->
+        <Setter
+            Property="Template" >
+            <ControlTemplate>
+                <Grid
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    ColumnDefinitions="*,*,*,*,*"
+                    >
+                    <Image
+                        x:Name="waterimg"
+                        MaxHeight="32"
+                        MaxWidth="32"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="5"
+                        Grid.Column="0"
+                        Source="{Binding WaterImg, RelativeSource={RelativeSource TemplatedParent}}"
+                        ></Image>
+                    <TextBlock
+                        x:Name="watertxt"
+                        FontSize="20"
+                        Margin="5"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Text="{Binding Water, RelativeSource={RelativeSource TemplatedParent}}"
+                    ></TextBlock>
+                    <TextBlock
+                        x:Name="timetxt"
+                        FontSize="20"
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Margin="5"
+                        VerticalAlignment="Center"
+                        Text="{Binding Time, RelativeSource={RelativeSource TemplatedParent}}"
+                        HorizontalAlignment="Center"
+                    ></TextBlock>
+                    <TextBlock
+                        x:Name="nonwatertxt"
+                        FontSize="20"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="5"
+                        Grid.Row="0"
+                        Grid.Column="3"
+                        Text="{Binding NonWater, RelativeSource={RelativeSource TemplatedParent}}"
+                    ></TextBlock>
+                    <Image
+                        x:Name="nonwaterimg"
+                        MaxHeight="32"
+                        MaxWidth="32"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="5"
+                        Grid.Column="4"
+                        Source="{Binding NonWaterImg, RelativeSource={RelativeSource TemplatedParent}}"
+                    ></Image>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

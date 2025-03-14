@@ -1,0 +1,125 @@
+﻿<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    CanResize="False"
+    Width="500"
+    Height="250"
+    Closing="Window_OnClosing"
+    d:DesignWidth="500"
+    d:DesignHeight="250"
+    WindowStartupLocation="CenterOwner"
+    x:Class="omo_tracker.avc.ProfilesNewProfile"
+    Title="profilesnewprofile" >
+    <Grid
+        ShowGridLines="True"
+        ColumnDefinitions="*, 2*"
+        RowDefinitions="*, 32"
+        >
+        <ListBox
+            Name="profilesbox"
+            Grid.Row="0"
+            Grid.Column="0"
+            >
+            Empty
+        </ListBox>
+        <Grid
+            Grid.RowSpan="2"
+            RowDefinitions="*,*,*,*,*,*"
+            ColumnDefinitions="*,*"
+            Grid.Row="0"
+            Grid.Column="1">
+            <TextBlock
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Name="state"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontSize="20"
+                Text="Creating new profile"
+                >
+            </TextBlock>
+            <Image
+                Grid.Row="1"
+                Grid.Column="0"
+                Name="pfp"
+                PointerPressed="InputElement_OnPointerPressed"
+                Source="../res/ph.png"
+                Grid.RowSpan="4"
+                Margin="5"
+                >
+            </Image>
+            <TextBox
+                Margin="5,0,5,0"
+                Name="nicknamebox"
+                Grid.Row="1"
+                Grid.Column="1"
+                UseFloatingWatermark="True"
+                Watermark="Nickname*"
+            ></TextBox>
+            <TextBox
+                Margin="5,0,5,0"
+                IsEnabled="True"
+                Grid.Row="2"
+                Grid.Column="1"
+                Name="SzTextBox"
+                TextChanged="ToDrinkBox_OnTextChanged"
+                UseFloatingWatermark="True"
+                Watermark="Bladder size"
+            ></TextBox>
+            <TextBox
+                Margin="5,0,5,0"
+                IsEnabled="False"
+                Grid.Row="3"
+                Grid.Column="1"
+                UseFloatingWatermark="True"
+                Watermark="Average rate - soon"
+            ></TextBox>
+            <TextBox
+                Name="imgsrctextbox"
+                Grid.Row="4"
+                Grid.Column="1"
+                Margin="5,0,5,0"
+                IsReadOnly="True"
+                UseFloatingWatermark="True"
+                Watermark="Image source"
+            ></TextBox>
+            <TextBlock
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Foreground="LightGray"
+                Text="created with &lt;3 by @thatfuckedupgirl :з"
+                >
+            </TextBlock>
+        </Grid>
+        <SplitButton
+            Grid.Column="0"
+            Grid.Row="1"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            Margin="5"
+            Name="Select"
+            Click="Button_OnClick"
+            >
+            <SplitButton.Content>
+                <TextBlock
+                    Width="100"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    Text="Select"
+                    ></TextBlock>
+            </SplitButton.Content>
+            <SplitButton.Flyout>
+                <MenuFlyout  Placement="Bottom">
+                    <MenuItem Foreground="Red" Width="150" Background="Pink" Click="Delete_OnClick" Name="Delete" Header="Delete" />
+                </MenuFlyout>
+            </SplitButton.Flyout>
+        </SplitButton>
+    </Grid>
+</Window>
