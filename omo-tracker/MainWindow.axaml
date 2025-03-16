@@ -1,0 +1,346 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1600" d:DesignHeight="900"
+        x:Class="omo_tracker.MainWindow"
+        Closed="TopLevel_OnClosed"
+        Opened="TopLevel_OnOpened"
+        Title="omo_tracker">
+    <Grid
+        ShowGridLines="False"
+        RowDefinitions="32,*"
+        ColumnDefinitions="*, 350">
+        <Menu
+            Grid.Row="0"
+            Grid.Column="0"
+            >
+            <MenuItem
+                Header="File">
+                <MenuItem
+                    Name="startfrommenu"
+                    Header="Start Hold"
+                    ></MenuItem>
+            </MenuItem>
+            <MenuItem
+                IsEnabled="False"
+                Header="Edit">
+            </MenuItem>
+            <MenuItem
+                IsEnabled="False"
+                Header="View">
+            </MenuItem>
+            <MenuItem
+                Click="MenuItem_OnClick"
+                Header="About">
+            </MenuItem>
+            
+        </Menu>
+        <Grid
+            HorizontalAlignment="Right"
+            Grid.Column="1"
+            ColumnDefinitions="32, *"
+            Grid.Row="0"
+            >
+            <Image
+                Name="pfp"
+                Source="res/ph.png"
+                ></Image>
+            <Button
+                Name="chpf"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Click="Chpf_OnClick"
+                >
+                Profile name
+            </Button>
+        </Grid>
+        <Grid
+            ShowGridLines="False"
+            RowDefinitions="*, *, *"
+            Grid.Column="0"
+            Grid.Row="1">
+        </Grid>
+        <TabControl          
+            Grid.Column="0"
+            Grid.Row="1">
+            <TabItem
+                Header="Home">
+                <Grid 
+                    Name="HomeGrid"
+                    ShowGridLines="True"
+                    RowDefinitions="3*, *, *"
+                    ColumnDefinitions="Auto, *, Auto">
+                    <Border
+                        Margin="10"
+                        
+                        BorderBrush="#707080"
+                        BorderThickness="2"
+                        Width="{Binding #watrborder.Bounds.Height}"
+                        Grid.Column="0"
+                        Grid.Row="0">
+                    <Border
+                        Margin="0,-4,-4,0"
+                        BorderBrush="#A0A0B0"
+                        BorderThickness="2"
+                        Background="Transparent"
+                        >
+                        <Grid
+                            Margin="0,2,2,0"
+                            RowDefinitions="Auto,*,Auto"
+                            Background="#404050"
+                            >
+                            <Button
+                                CornerRadius="0"
+                                Background="#C0C0D0"
+                                Foreground="Black"
+                                IsEnabled="True"
+                                FontSize="20"
+                                Name="DrinkButton"
+                                Grid.Row="0"
+                                Click="DrinkButton_OnClick"
+                                HorizontalAlignment="Stretch"
+                                Content="drink!"
+                            ></Button>
+                            <Border
+                                BoxShadow="inset -2 2 10 0 #4C516D"
+                                Name="watrborder"
+                                Grid.Row="1"
+                                >
+                                <Image
+                                    Name="watrimg"
+                                    Source="/res/water/wmt.bmp"
+                                    Margin="10"
+                                ></Image>
+                            </Border>
+                            <Border
+                                Height="{Binding #DrinkButton.Bounds.Height}"
+                                Background="#C0C0D0"
+                                Padding="4"
+                                HorizontalAlignment="Stretch"
+                                Grid.Row="2"
+                                >
+                                <TextBlock
+                                    Name="watervol"
+                                    TextAlignment="Center"
+                                    FontSize="20"
+                                    Text="0 ml"
+                                    ></TextBlock>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    </Border>
+                     <Border
+                        Margin="10"
+                        BorderBrush="LightGray"
+                        BorderThickness="2"
+                        Width="{Binding #watrborder.Bounds.Height}"
+                        Grid.Column="2"
+                        Grid.Row="0">
+                    <Border
+                        BorderBrush="DarkGray"
+                        BorderThickness="2"
+                        Background="#DBA800"
+                        >
+                        <Grid
+                            RowDefinitions="Auto,*,Auto"
+                            >
+                            <Border
+                                Height="{Binding #DrinkButton.Bounds.Height}"
+                                Background="LightSteelBlue"
+                                Padding="4"
+                                HorizontalAlignment="Stretch"
+                                Grid.Row="0"
+                            >
+                                <TextBlock
+                                    Name="nonwatervol"
+                                    HorizontalAlignment="Center"
+                                    FontSize="20"
+                                    Text="0 ml"
+                                ></TextBlock>
+                            </Border>
+                            <Border
+                                BoxShadow="inset -2 2 10 0 #B58B00"
+                                Name="nonwatrborder"
+                                Grid.Row="1"
+                                >
+                                <Image
+                                    Name="nonwatrimg"
+                                    IsVisible="True"
+                                    Source="/res/nonwater/umt.bmp"
+                                ></Image>
+                            </Border>
+                            <Button
+                                CornerRadius="0"
+                                Background="LightSteelBlue"
+                                Foreground="Black"
+                                IsEnabled="True"
+                                FontSize="20"
+                                Name="LeakButton"
+                                Grid.Row="2"
+                                Click="DrinkButton_OnClick"
+                                HorizontalAlignment="Stretch"
+                                Content="leak >:["
+                            ></Button>
+
+                        </Grid>
+                    </Border>
+                    </Border>
+                    <Grid
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        RowDefinitions="*, *, *"
+                        >
+                        <Button
+                            Grid.Row="0"
+                            Name="StartButton"
+                            HorizontalAlignment="Stretch"
+                            Click="StartButton_OnClick"
+                            Content="Start Hold"
+                            >
+                            
+                        </Button>
+                        <TextBox
+                            Grid.Row="1"
+                            IsEnabled="False"
+                            Name="ToDrinkBox"
+                            Watermark="0ml"
+                            TextChanged="ToDrinkBox_OnTextChanged"
+                            HorizontalAlignment="Stretch"
+                            ></TextBox>
+                    </Grid>
+                    <TextBlock
+                        FontSize="32"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Name="holdtime"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Text="00:00"
+                        ></TextBlock>
+                </Grid>
+            </TabItem>
+            <TabItem
+                IsEnabled="False"
+                Header="Singleplayer games">
+                <Grid 
+                    ShowGridLines="False"
+                    RowDefinitions="*, *, *, *, *"
+                    ColumnDefinitions="*, *, *, *, *">    
+                </Grid>
+            </TabItem>
+            <TabItem
+                IsEnabled="False"
+                Header="Multiplayer games">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <WrapPanel>
+                        <Button Margin="20" Width="200" Height="264">
+                            <Grid
+                                Margin="0"
+                                RowDefinitions="200, 64">
+                                <Image Source="res/boardgm.png"></Image>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    TextWrapping="Wrap">
+                                    The long road to the bathroom
+                                </TextBlock>
+                            </Grid>
+                        </Button>
+                        <Button Margin="20" Width="200" Height="264">
+                            <Grid
+                                Margin="0"
+                                RowDefinitions="200, 64">
+                                <Image
+                                    
+                                    Source="res/ph.png"></Image>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    TextWrapping="Wrap">
+                                    placeholder
+                                </TextBlock>
+                            </Grid>
+                        </Button>
+                        <Button Margin="20" Width="200" Height="264">
+                            <Grid
+                                Margin="0"
+                                RowDefinitions="200, 64">
+                                <Image Source="res/ph.png"></Image>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    TextWrapping="Wrap">
+                                    placeholder
+                                </TextBlock>
+                            </Grid>
+                        </Button>
+                        <Button Margin="20" Width="200" Height="264">
+                            <Grid
+                                Margin="0"
+                                RowDefinitions="200, 64">
+                                <Image Source="res/ph.png"></Image>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    TextWrapping="Wrap">
+                                    placeholder
+                                </TextBlock>
+                            </Grid>
+                        </Button>
+                        <Button Margin="20" Width="200" Height="264">
+                            <Grid
+                                Margin="0"
+                                RowDefinitions="200, 64">
+                                <Image Source="res/ph.png"></Image>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    TextWrapping="Wrap">
+                                    placeholder
+                                </TextBlock>
+                            </Grid>
+                        </Button>
+                        <Button Margin="20" Width="200" Height="264">
+                            <Grid
+                                Margin="0"
+                                RowDefinitions="200, 64">
+                                <Image Source="res/ph.png"></Image>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    TextWrapping="Wrap">
+                                    placeholder
+                                </TextBlock>
+                            </Grid>
+                        </Button>
+                        <Button Margin="20" Width="200" Height="264">
+                            <Grid
+                                Margin="0"
+                                RowDefinitions="200, 64">
+                                <Image Source="res/ph.png"></Image>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    TextWrapping="Wrap">
+                                    placeholder
+                                </TextBlock>
+                            </Grid>
+                        </Button>
+                    </WrapPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <Grid
+            RowDefinitions="32, *"
+            Grid.Column="1"
+            Grid.Row="1">
+            <TextBlock
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Text="Holding history"
+                ></TextBlock>
+            <ListBox 
+                Name="HistoryBox"
+                Grid.Row="1">
+                <ListBoxItem>
+                    Empty
+                </ListBoxItem>
+            </ListBox>            
+        </Grid>
+    </Grid>
+</Window>

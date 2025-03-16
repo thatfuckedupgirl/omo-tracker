@@ -1,0 +1,75 @@
+﻿<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Width="400"
+    Height="600"
+    CanResize="False"
+    WindowStartupLocation="CenterOwner"
+    d:DesignHeight="450"
+    x:Class="omo_tracker.avc.AboutWindow"
+    Title="AboutWindow" >
+    <Grid
+        RowDefinitions="111,*,32"
+        Background="Gainsboro"
+        >
+        <Border
+            Margin="5"
+            BorderBrush="DimGray"
+            Background="LightGray"
+            BorderThickness="1">
+        <Border
+            BorderBrush="Gray"
+            Background="LightGray"
+            BorderThickness="1">
+            <Image
+                Margin="5"
+                Source="../res/logos/tccorp.png"
+            ></Image>            
+        </Border>
+        </Border>
+        <Border
+            Grid.Row="1"
+            Margin="5"
+            BorderBrush="DimGray"
+            Background="LightGray"
+            BorderThickness="1">
+            <Border
+                BorderBrush="Gray"
+                Background="LightGray"
+                BorderThickness="1">
+                <TextBlock
+                    FontSize="12"
+                    Padding="35,0,0,0"
+                    Text="TC Corp® omo-tracker™
+                    &#10;Version 0.1.0-a
+                    &#10;Maintainer: that fucked up girl (y'know her)
+                    &#10;©TC Corp. All rights reserved.
+                    &#10;
+                    &#10;
+                    &#10;
+                    &#10;
+                    &#10;
+                    &#10;
+                    &#10;
+                    &#10;
+                    &#10;
+                    &#10;
+                    &#10;This product is licensed under the terms she probably
+                    &#10;wont read (so i wont bother to write them) to:
+                    &#10;        IDK, probably another fucked up girl :з
+                    "
+                    Margin="5"
+                    >
+                </TextBlock>            
+            </Border>
+        </Border>
+        <Button
+            Click="Button_OnClick"
+            Content="OK"
+            Grid.Row="2">
+        </Button>
+    </Grid>
+</Window>

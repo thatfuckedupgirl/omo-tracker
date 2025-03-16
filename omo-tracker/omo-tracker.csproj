@@ -1,0 +1,97 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.2.5" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.2.5" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.5" />
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.5" />
+        <PackageReference Include="MessageBox.Avalonia" Version="3.2.0" />
+        <PackageReference Include="Semi.Avalonia" Version="11.2.1.5" />
+        <PackageReference Include="Semi.Avalonia.ColorPicker" Version="11.2.1.5" />
+        <PackageReference Include="Semi.Avalonia.DataGrid" Version="11.2.1.5" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <None Remove="res\boardgm.png" />
+      <AvaloniaResource Include="res\boardgm.png" />
+      <None Remove="res\6x8d9x1z.png" />
+      <AvaloniaResource Include="res\ph.png" />
+      <None Remove="res\water\w01.bmp" />
+      <AvaloniaResource Include="res\water\w01.bmp" />
+      <None Remove="res\water\w02.bmp" />
+      <AvaloniaResource Include="res\water\w02.bmp" />
+      <None Remove="res\water\w03.bmp" />
+      <AvaloniaResource Include="res\water\w03.bmp" />
+      <None Remove="res\water\w04.bmp" />
+      <AvaloniaResource Include="res\water\w04.bmp" />
+      <None Remove="res\water\w05.bmp" />
+      <AvaloniaResource Include="res\water\w05.bmp" />
+      <None Remove="res\water\w06.bmp" />
+      <AvaloniaResource Include="res\water\w06.bmp" />
+      <None Remove="res\water\w07.bmp" />
+      <AvaloniaResource Include="res\water\w07.bmp" />
+      <None Remove="res\water\w08.bmp" />
+      <AvaloniaResource Include="res\water\w08.bmp" />
+      <None Remove="res\water\w09.bmp" />
+      <AvaloniaResource Include="res\water\w09.bmp" />
+      <None Remove="res\water\w10.bmp" />
+      <AvaloniaResource Include="res\water\w10.bmp" />
+      <None Remove="res\water\wmt.bmp" />
+      <AvaloniaResource Include="res\water\wmt.bmp" />
+      <None Remove="res\nonwater\u01.bmp" />
+      <AvaloniaResource Include="res\nonwater\u01.bmp" />
+      <None Remove="res\nonwater\u02.bmp" />
+      <AvaloniaResource Include="res\nonwater\u02.bmp" />
+      <None Remove="res\nonwater\u03.bmp" />
+      <AvaloniaResource Include="res\nonwater\u03.bmp" />
+      <None Remove="res\nonwater\u04.bmp" />
+      <AvaloniaResource Include="res\nonwater\u04.bmp" />
+      <None Remove="res\nonwater\u05.bmp" />
+      <AvaloniaResource Include="res\nonwater\u05.bmp" />
+      <None Remove="res\nonwater\u06.bmp" />
+      <AvaloniaResource Include="res\nonwater\u06.bmp" />
+      <None Remove="res\nonwater\u07.bmp" />
+      <AvaloniaResource Include="res\nonwater\u07.bmp" />
+      <None Remove="res\nonwater\u08.bmp" />
+      <AvaloniaResource Include="res\nonwater\u08.bmp" />
+      <None Remove="res\nonwater\u09.bmp" />
+      <AvaloniaResource Include="res\nonwater\u09.bmp" />
+      <None Remove="res\nonwater\u10.bmp" />
+      <AvaloniaResource Include="res\nonwater\u10.bmp" />
+      <None Remove="res\nonwater\umt.bmp" />
+      <AvaloniaResource Include="res\nonwater\umt.bmp" />
+      <None Remove="res\logos\tccorp.png" />
+      <AvaloniaResource Include="res\logos\tccorp.png" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Compile Update="games\tlrttb.axaml.cs">
+        <DependentUpon>tlrttb.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="avc\ProfilesNewProfile.cs">
+        <DependentUpon>profilesnewprofile.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="avc\ProfilesNewProfile.axaml.cs">
+        <DependentUpon>profilesnewprofile.axaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Folder Include="res\nonwater\" />
+      <Folder Include="res\water\" />
+    </ItemGroup>
+</Project>
