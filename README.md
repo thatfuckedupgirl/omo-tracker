@@ -15,7 +15,7 @@
 - [ ] p2p connection for local connection or through VPN (like minecraft servers, radminvpn, hamachi, etc)
 - [ ] android app with desktop sync via local network/vpn/bluetooth
 - [ ] inbuilt p2p connection without additional app (for tech savvy and won't work on every machine)
-### - [ ] broadcastleplayer games:
+### - [ ] singleplayer games:
 - [ ] simple premade challenges 
 - [ ] challenge creator / challenge sharing via broadcastle file
 - [ ] some games based on dice
