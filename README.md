@@ -2,9 +2,9 @@
 ### anything¹ your pervy soul desires!
 ¹anything means any tool i finished (or less because the new one was broken)
 ## main info: 
-current state: active development. 
-stage: public alpha.
-publisher: TC corporation
+- current state: active development. 
+- stage: public alpha.
+- publisher: TC corporation
 ## roadmap
 - [x] user profiles
 - [x] liquid tracker
