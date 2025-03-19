@@ -10,5 +10,6 @@
         <StyleInclude Source="avc/HistoryBoxItem.axaml"></StyleInclude>
         <StyleInclude Source="avares://Semi.Avalonia.ColorPicker/Index.axaml" />
         <StyleInclude Source="avares://Semi.Avalonia.DataGrid/Index.axaml" />
+        <StyleInclude Source="avc/nohover.axaml"></StyleInclude>
     </Application.Styles>
 </Application>

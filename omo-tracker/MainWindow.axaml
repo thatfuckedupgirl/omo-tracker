@@ -1,322 +1,665 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="1600" d:DesignHeight="900"
-        x:Class="omo_tracker.MainWindow"
-        Closed="TopLevel_OnClosed"
-        Opened="TopLevel_OnOpened"
-        Title="omo_tracker">
+<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="1600"
+    d:DesignHeight="900"
+    MinHeight="400"
+    MinWidth="600"
+    x:Class="omo_tracker.MainWindow"
+    SizeChanged="Control_OnSizeChanged"
+    Closed="TopLevel_OnClosed"
+    Opened="TopLevel_OnOpened"
+    Title="omo_tracker" >
     <Grid
         ShowGridLines="False"
         RowDefinitions="32,*"
-        ColumnDefinitions="*, 350">
-        <Menu
+        ColumnDefinitions="*, Auto" >
+        <Grid
+            ColumnDefinitions="*, Auto"
             Grid.Row="0"
             Grid.Column="0"
+            Grid.ColumnSpan="2"
             >
-            <MenuItem
-                Header="File">
+            <Menu
+            >
                 <MenuItem
-                    Name="startfrommenu"
-                    Header="Start Hold"
-                    ></MenuItem>
-            </MenuItem>
-            <MenuItem
-                IsEnabled="False"
-                Header="Edit">
-            </MenuItem>
-            <MenuItem
-                IsEnabled="False"
-                Header="View">
-            </MenuItem>
-            <MenuItem
-                Click="MenuItem_OnClick"
-                Header="About">
-            </MenuItem>
-            
-        </Menu>
-        <Grid
-            HorizontalAlignment="Right"
-            Grid.Column="1"
-            ColumnDefinitions="32, *"
-            Grid.Row="0"
-            >
-            <Image
-                Name="pfp"
-                Source="res/ph.png"
-                ></Image>
-            <Button
-                Name="chpf"
-                Grid.Column="1"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Click="Chpf_OnClick"
+                    Header="File" >
+                    <MenuItem
+                        Name="startfrommenu"
+                        Header="Start Hold"/>
+                </MenuItem>
+                <MenuItem
+                    IsEnabled="False"
+                    Header="Edit"/>
+                <MenuItem
+                    IsEnabled="False"
+                    Header="View"/>
+                <MenuItem
+                    Header="Switch to game..."
                 >
-                Profile name
-            </Button>
+                    <MenuItem
+                        IsEnabled="False"
+                        Header="No active games"
+                    >
+                    
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem
+                    Click="MenuItem_OnClick"
+                    Header="About"/>
+                </Menu>
+            <Grid
+                HorizontalAlignment="Right"
+                Grid.Column="1"
+                ColumnDefinitions="32, *,*"
+                Grid.Row="0" >
+                <Image
+                    Name="pfp"
+                    Source="res/ph.png"/>
+                <Button
+                    Name="chpf"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="Chpf_OnClick" >
+                    Profile name
+                </Button>
+                <ToggleButton
+                    Name="SidebarToggle"
+                    Grid.Column="2"
+                    Content="Sidebar"
+                    IsChecked="True"
+                    >
+                    
+                </ToggleButton>
+            </Grid>
         </Grid>
+        
         <Grid
             ShowGridLines="False"
             RowDefinitions="*, *, *"
             Grid.Column="0"
-            Grid.Row="1">
-        </Grid>
-        <TabControl          
+            Grid.Row="1"/>
+        <TabControl
             Grid.Column="0"
-            Grid.Row="1">
+            Grid.Row="1" >
             <TabItem
-                Header="Home">
-                <Grid 
+                Header="Home" >
+                <Grid
                     Name="HomeGrid"
-                    ShowGridLines="True"
+                    ShowGridLines="False"
                     RowDefinitions="3*, *, *"
-                    ColumnDefinitions="Auto, *, Auto">
+                    ColumnDefinitions="*, *, *" >
                     <Border
                         Margin="10"
-                        
                         BorderBrush="#707080"
                         BorderThickness="2"
-                        Width="{Binding #watrborder.Bounds.Height}"
+                        Name="Border3"
                         Grid.Column="0"
-                        Grid.Row="0">
-                    <Border
-                        Margin="0,-4,-4,0"
-                        BorderBrush="#A0A0B0"
-                        BorderThickness="2"
-                        Background="Transparent"
-                        >
-                        <Grid
-                            Margin="0,2,2,0"
-                            RowDefinitions="Auto,*,Auto"
-                            Background="#404050"
-                            >
-                            <Button
-                                CornerRadius="0"
-                                Background="#C0C0D0"
-                                Foreground="Black"
-                                IsEnabled="True"
-                                FontSize="20"
-                                Name="DrinkButton"
-                                Grid.Row="0"
-                                Click="DrinkButton_OnClick"
-                                HorizontalAlignment="Stretch"
-                                Content="drink!"
-                            ></Button>
-                            <Border
-                                BoxShadow="inset -2 2 10 0 #4C516D"
-                                Name="watrborder"
-                                Grid.Row="1"
-                                >
-                                <Image
-                                    Name="watrimg"
-                                    Source="/res/water/wmt.bmp"
-                                    Margin="10"
-                                ></Image>
-                            </Border>
-                            <Border
-                                Height="{Binding #DrinkButton.Bounds.Height}"
-                                Background="#C0C0D0"
-                                Padding="4"
-                                HorizontalAlignment="Stretch"
-                                Grid.Row="2"
-                                >
-                                <TextBlock
-                                    Name="watervol"
-                                    TextAlignment="Center"
+                        Grid.Row="0" >
+                        <Border
+                            Margin="0,-4,-4,0"
+                            BorderBrush="#A0A0B0"
+                            BorderThickness="2"
+                            Background="Transparent" >
+                            <Grid
+                                Margin="0,2,2,0"
+                                RowDefinitions="Auto,*,Auto"
+                                ColumnDefinitions="*,*"
+                                Background="#404050" >
+                                <Button
+                                    Classes="nochange"
+                                    Grid.ColumnSpan="1"
+                                    CornerRadius="0"
+                                    Background="#C0C0D0"
+                                    Foreground="Black"
+                                    IsEnabled="True"
                                     FontSize="20"
-                                    Text="0 ml"
-                                    ></TextBlock>
-                            </Border>
-                        </Grid>
+                                    Name="DrinkButton"
+                                    Grid.Row="0"
+                                    Click="DrinkButton_OnClick"
+                                    HorizontalAlignment="Stretch"
+                                    Content="drink!"
+                                    Margin="0,0,1,0"/>
+                                <TextBox
+                                    Classes="nochange"
+                                    Name="ToDrinkBox"
+                                    Watermark="0ml"
+                                    FontSize="20"
+                                    TextChanged="ToDrinkBox_OnTextChanged"
+                                    VerticalContentAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    Margin="1,0,0,0"
+                                    CornerRadius="0"
+                                    Background="#C0C0D0"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="0">
+                                </TextBox>
+                                <Border
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    BoxShadow="inset -2 2 10 0 #101020"
+                                    Name="watrborder"
+                                    Grid.Row="1" >
+                                    <Image
+                                        Name="watrimg"
+                                        Source="/res/water/wmt.bmp"
+                                        Margin="10"/>
+                                </Border>
+                                <Border
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Height="{Binding #DrinkButton.Bounds.Height}"
+                                    Background="#C0C0D0"
+                                    Padding="4"
+                                    HorizontalAlignment="Stretch"
+                                    Grid.Row="2" >
+                                    <TextBlock
+                                        Name="watervol"
+                                        TextAlignment="Center"
+                                        FontSize="20"
+                                        Text="0 ml"/>
+                                </Border>
+                            </Grid>
+                        </Border>
                     </Border>
-                    </Border>
-                     <Border
+                    <Border
+                        Name="Border1"
                         Margin="10"
-                        BorderBrush="LightGray"
-                        BorderThickness="2"
-                        Width="{Binding #watrborder.Bounds.Height}"
-                        Grid.Column="2"
-                        Grid.Row="0">
-                    <Border
-                        BorderBrush="DarkGray"
-                        BorderThickness="2"
-                        Background="#DBA800"
-                        >
-                        <Grid
-                            RowDefinitions="Auto,*,Auto"
-                            >
-                            <Border
-                                Height="{Binding #DrinkButton.Bounds.Height}"
-                                Background="LightSteelBlue"
-                                Padding="4"
-                                HorizontalAlignment="Stretch"
-                                Grid.Row="0"
-                            >
-                                <TextBlock
-                                    Name="nonwatervol"
-                                    HorizontalAlignment="Center"
-                                    FontSize="20"
-                                    Text="0 ml"
-                                ></TextBlock>
-                            </Border>
-                            <Border
-                                BoxShadow="inset -2 2 10 0 #B58B00"
-                                Name="nonwatrborder"
-                                Grid.Row="1"
-                                >
-                                <Image
-                                    Name="nonwatrimg"
-                                    IsVisible="True"
-                                    Source="/res/nonwater/umt.bmp"
-                                ></Image>
-                            </Border>
-                            <Button
-                                CornerRadius="0"
-                                Background="LightSteelBlue"
-                                Foreground="Black"
-                                IsEnabled="True"
-                                FontSize="20"
-                                Name="LeakButton"
-                                Grid.Row="2"
-                                Click="DrinkButton_OnClick"
-                                HorizontalAlignment="Stretch"
-                                Content="leak >:["
-                            ></Button>
-
-                        </Grid>
-                    </Border>
-                    </Border>
-                    <Grid
                         Grid.Column="1"
                         Grid.Row="0"
-                        RowDefinitions="*, *, *"
-                        >
-                        <Button
-                            Grid.Row="0"
-                            Name="StartButton"
-                            HorizontalAlignment="Stretch"
-                            Click="StartButton_OnClick"
-                            Content="Start Hold"
-                            >
-                            
-                        </Button>
-                        <TextBox
-                            Grid.Row="1"
-                            IsEnabled="False"
-                            Name="ToDrinkBox"
-                            Watermark="0ml"
-                            TextChanged="ToDrinkBox_OnTextChanged"
-                            HorizontalAlignment="Stretch"
-                            ></TextBox>
-                    </Grid>
-                    <TextBlock
-                        FontSize="32"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Name="holdtime"
+                        BorderBrush="#707070"
+                        BorderThickness="2" >
+                        <Border
+                            Margin="0,-4,-4,0"
+                            BorderBrush="#A0A0A0"
+                            BorderThickness="2"
+                            Background="Transparent" >
+                            <Grid
+                                Background="#C0C0C0"
+                                Margin="0, 2, 2, 0"
+                                ColumnDefinitions="*, *"
+                                RowDefinitions="128, 64, *, Auto, Auto, Auto" >
+                                <Border
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Grid.Row="0"
+                                    BorderBrush="#A0A0A0"
+                                    BoxShadow="inset -2 2 10 0 #101010"
+                                    Name="timeborder"
+                                    >
+                                    <TextBlock
+                                        FontSize="64"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Name="holdtime"
+                                        Text="00:00:00"/>
+                                </Border>
+                                <Border
+                                    BorderBrush="#A0A0A0"
+                                    BorderThickness="0,2,0,2"
+                                    Grid.Column="0"
+                                    Grid.Row="1">
+                                    <Border
+                                        BorderBrush="#707070"
+                                        Margin="0,0,0,-4"
+                                        BorderThickness="0,2,2,2">
+                                        <Border
+                                            Margin="0,0,0,2"
+                                            BoxShadow="inset -2 2 10 0 #101010"
+                                            Name="starttimeborder">
+                                            <TextBlock
+                                                FontSize="32"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Name="starttime"
+                                                Text="00:00:00"/>
+                                        </Border>
+                                   </Border>
+                                </Border>
+                                <Border
+                                    BorderBrush="#A0A0A0"
+                                    BorderThickness="2,2,0,2"
+                                    Grid.Column="1"
+                                    Grid.Row="1">
+                                    <Border
+                                        BorderBrush="#707070"
+                                        Margin="-2,0,0,-4"
+                                        BorderThickness="0,2,0,2">
+                                        <Border
+                                            Margin="2,0,0,2"
+                                            BoxShadow="inset -2 2 10 0 #101010"
+                                            Name="endtimeborder">
+                                            <TextBlock
+                                                FontSize="32"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Name="endttime"
+                                                Text="00:00:00"/>
+                                       </Border>
+                                    </Border>
+                                </Border>
+                                <TextBlock
+                                    Name="spacer"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Grid.Row="2"
+                                    FontSize="9"
+                                    VerticalAlignment="Bottom"
+                                    Foreground="Gray"
+                                    Text="TC-corp© omo-tracker™ TE698 all rights reserved"
+                                    ></TextBlock>
+                                <Button
+                                    CornerRadius="0"
+                                    Margin="0,0,0,1"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Grid.Row="3"
+                                    Name="StartButton"
+                                    HorizontalAlignment="Stretch"
+                                    Click="StartButton_OnClick"
+                                    Content="Start Hold"/>
+                                <Button
+                                    
+                                    Name="SetData"
+                                    Click="SetData_OnClick"
+                                    IsEnabled="False"
+                                    Grid.Column="0"
+                                    Grid.Row="4"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Stretch"
+                                    CornerRadius="0"
+                                    Margin="0,0,1,1"
+                                    Content="Set data [Soon]"
+                                    >
+                                </Button>
+                                <Button
+                                    Click="CancelButton_OnClick"
+                                    Name="cancelButton"
+                                    Margin="1,1,0,1"
+                                    Grid.Column="1"
+                                    Grid.Row="4"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Stretch"
+                                    CornerRadius="0"
+                                    >
+                                    Cancel action
+                                </Button>
+                                <Button
+                                    Click="WetButton_OnClick"
+                                    Name="wetButton"
+                                    Grid.Column="0"
+                                    Grid.Row="5"
+                                    Grid.ColumnSpan="2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Stretch"
+                                    CornerRadius="0"
+                                    Margin="0,1,1,0"
+                                >
+                                    WET
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </Border>
+                    <Border
+                        Name="Border2"
+                        Margin="10"
+                        BorderBrush="#808070"
+                        BorderThickness="2"
+                        Grid.Column="2"
+                        Grid.Row="0" >
+                        <Border
+                            Margin="0, -4, -4, 0"
+                            BorderBrush="#B0B0A0"
+                            BorderThickness="2"
+                            Background="Transparent" >
+                            <Grid
+                                Background="#505040"
+                                Margin="0, 2, 2, 0"
+                                ColumnDefinitions="*, *"
+                                RowDefinitions="Auto,*,Auto" >
+                                <Border
+                                    Height="{Binding #DrinkButton.Bounds.Height}"
+                                    Background="#D0D0C0"
+                                    Padding="4"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    HorizontalAlignment="Stretch"
+                                    Grid.Row="0" >
+                                    <TextBlock
+                                        Name="nonwatervol"
+                                        HorizontalAlignment="Center"
+                                        FontSize="20"
+                                        Text="0 ml"/>
+                                </Border>
+                                <Border
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    BoxShadow="inset -2 2 10 0 #202010"
+                                    Name="nonwatrborder"
+                                    Grid.Row="1" >
+                                    <Image
+                                        Name="nonwatrimg"
+                                        IsVisible="True"
+                                        Source="/res/nonwater/umt.bmp"/>
+                                </Border>
+                                <Button
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="1"
+                                    Margin="0,0,1,0"
+                                    Classes="nochange"
+                                    CornerRadius="0"
+                                    Background="#D0D0C0"
+                                    Foreground="Black"
+                                    IsEnabled="True"
+                                    FontSize="20"
+                                    Name="LeakButton"
+                                    Grid.Row="2"
+                                    Click="LeakButton_OnClick"
+                                    HorizontalAlignment="Stretch"
+                                    Content="leak >:["/>
+                                <TextBox
+                                    Classes="nochange"
+                                    Name="ToLeakBox"
+                                    Watermark="0ml"
+                                    TextChanged="ToDrinkBox_OnTextChanged"
+                                    VerticalContentAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    Margin="1,0,0,0"
+                                    CornerRadius="0"
+                                    FontSize="20"
+                                    Background="#D0D0C0"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="0">
+                                </TextBox>
+
+                            </Grid>
+                        </Border>
+                    </Border>
+                    <Border
+                        Name="Feed2"
+                        Margin="10"
                         Grid.Column="1"
                         Grid.Row="1"
-                        Text="00:00"
-                        ></TextBlock>
+                        BorderBrush="#707070"
+                        BorderThickness="2" >
+                        <Border
+                            Margin="0,-4,-4,0"
+                            BorderBrush="#A0A0A0"
+                            BorderThickness="2"
+                            Background="Transparent" >
+                            <Border
+                                BoxShadow="inset -2 2 10 0 #202010"
+                                >
+                                <TextBlock
+                                    FontSize="64"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    >
+                                    [WIP]
+                                </TextBlock>
+                            </Border>
+                        </Border>
+                        </Border>
+                    <Border
+                        Name="Feed3"
+                        Margin="10"
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        BorderBrush="#707070"
+                        BorderThickness="2" >
+                        <Border
+                            Margin="0,-4,-4,0"
+                            BorderBrush="#A0A0A0"
+                            BorderThickness="2"
+                            Background="Transparent" >
+                            <Border
+                                BoxShadow="inset -2 2 10 0 #202010"
+                            >
+                                <TextBlock
+                                    FontSize="64"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                >
+                                    [WIP]
+                                </TextBlock>
+                            </Border>
+                        </Border>
+                    </Border>
+                    <Border
+                        Name="Feed4"
+                        Margin="10"
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        BorderBrush="#707070"
+                        BorderThickness="2" >
+                        <Border
+                            Margin="0,-4,-4,0"
+                            BorderBrush="#A0A0A0"
+                            BorderThickness="2"
+                            Background="Transparent" >
+                            <Border
+                                BoxShadow="inset -2 2 10 0 #202010"
+                            >
+                                <TextBlock
+                                    FontSize="64"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                >
+                                    [WIP]
+                                </TextBlock>
+                            </Border>
+                        </Border>
+                    </Border>
+                    <Border
+                        Name="Feed5"
+                        Margin="10"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        BorderBrush="#707070"
+                        BorderThickness="2" >
+                        <Border
+                            Margin="0,-4,-4,0"
+                            BorderBrush="#A0A0A0"
+                            BorderThickness="2"
+                            Background="Transparent" >
+                            <Border
+                                BoxShadow="inset -2 2 10 0 #202010"
+                            >
+                                <TextBlock
+                                    FontSize="64"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                >
+                                    [WIP]
+                                </TextBlock>
+                            </Border>
+                        </Border>
+                    </Border>
+                    <Border
+                        Name="Feed6"
+                        Margin="10"
+                        Grid.Column="2"
+                        Grid.Row="2"
+                        BorderBrush="#707070"
+                        BorderThickness="2" >
+                        <Border
+                            Margin="0,-4,-4,0"
+                            BorderBrush="#A0A0A0"
+                            BorderThickness="2"
+                            Background="Transparent" >
+                            <Border
+                                BoxShadow="inset -2 2 10 0 #202010"
+                            >
+                                <TextBlock
+                                    FontSize="64"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                >
+                                    [WIP]
+                                </TextBlock>
+                            </Border>
+                        </Border>
+                    </Border>
+                    <Border
+                        Name="Feed1"
+                        Margin="10"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        BorderBrush="#707070"
+                        BorderThickness="2" >
+                        <Border
+                            Margin="0,-4,-4,0"
+                            BorderBrush="#A0A0A0"
+                            BorderThickness="2"
+                            Background="Transparent" >
+                            <Border
+                                BoxShadow="inset -2 2 10 0 #202010"
+                            >
+                                <TextBlock
+                                    FontSize="64"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                >
+                                    [WIP]
+                                </TextBlock>
+                            </Border>
+                        </Border>
+                    </Border>
                 </Grid>
             </TabItem>
             <TabItem
                 IsEnabled="False"
-                Header="Singleplayer games">
-                <Grid 
+                Header="Singleplayer games" >
+                <Grid
                     ShowGridLines="False"
                     RowDefinitions="*, *, *, *, *"
-                    ColumnDefinitions="*, *, *, *, *">    
-                </Grid>
+                    ColumnDefinitions="*, *, *, *, *"/>
             </TabItem>
             <TabItem
                 IsEnabled="False"
-                Header="Multiplayer games">
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                Header="Multiplayer games" >
+                <ScrollViewer
+                    HorizontalScrollBarVisibility="Disabled"
+                    VerticalScrollBarVisibility="Auto" >
                     <WrapPanel>
-                        <Button Margin="20" Width="200" Height="264">
+                        <Button
+                            Margin="20"
+                            Width="200"
+                            Height="264" >
                             <Grid
                                 Margin="0"
-                                RowDefinitions="200, 64">
-                                <Image Source="res/boardgm.png"></Image>
+                                RowDefinitions="200, 64" >
+                                <Image
+                                    Source="res/boardgm.png"/>
                                 <TextBlock
                                     Grid.Row="1"
-                                    TextWrapping="Wrap">
+                                    TextWrapping="Wrap" >
                                     The long road to the bathroom
                                 </TextBlock>
                             </Grid>
                         </Button>
-                        <Button Margin="20" Width="200" Height="264">
+                        <Button
+                            Margin="20"
+                            Width="200"
+                            Height="264" >
                             <Grid
                                 Margin="0"
-                                RowDefinitions="200, 64">
+                                RowDefinitions="200, 64" >
                                 <Image
-                                    
-                                    Source="res/ph.png"></Image>
+                                    Source="res/ph.png"/>
                                 <TextBlock
                                     Grid.Row="1"
-                                    TextWrapping="Wrap">
+                                    TextWrapping="Wrap" >
                                     placeholder
                                 </TextBlock>
                             </Grid>
                         </Button>
-                        <Button Margin="20" Width="200" Height="264">
+                        <Button
+                            Margin="20"
+                            Width="200"
+                            Height="264" >
                             <Grid
                                 Margin="0"
-                                RowDefinitions="200, 64">
-                                <Image Source="res/ph.png"></Image>
+                                RowDefinitions="200, 64" >
+                                <Image
+                                    Source="res/ph.png"/>
                                 <TextBlock
                                     Grid.Row="1"
-                                    TextWrapping="Wrap">
+                                    TextWrapping="Wrap" >
                                     placeholder
                                 </TextBlock>
                             </Grid>
                         </Button>
-                        <Button Margin="20" Width="200" Height="264">
+                        <Button
+                            Margin="20"
+                            Width="200"
+                            Height="264" >
                             <Grid
                                 Margin="0"
-                                RowDefinitions="200, 64">
-                                <Image Source="res/ph.png"></Image>
+                                RowDefinitions="200, 64" >
+                                <Image
+                                    Source="res/ph.png"/>
                                 <TextBlock
                                     Grid.Row="1"
-                                    TextWrapping="Wrap">
+                                    TextWrapping="Wrap" >
                                     placeholder
                                 </TextBlock>
                             </Grid>
                         </Button>
-                        <Button Margin="20" Width="200" Height="264">
+                        <Button
+                            Margin="20"
+                            Width="200"
+                            Height="264" >
                             <Grid
                                 Margin="0"
-                                RowDefinitions="200, 64">
-                                <Image Source="res/ph.png"></Image>
+                                RowDefinitions="200, 64" >
+                                <Image
+                                    Source="res/ph.png"/>
                                 <TextBlock
                                     Grid.Row="1"
-                                    TextWrapping="Wrap">
+                                    TextWrapping="Wrap" >
                                     placeholder
                                 </TextBlock>
                             </Grid>
                         </Button>
-                        <Button Margin="20" Width="200" Height="264">
+                        <Button
+                            Margin="20"
+                            Width="200"
+                            Height="264" >
                             <Grid
                                 Margin="0"
-                                RowDefinitions="200, 64">
-                                <Image Source="res/ph.png"></Image>
+                                RowDefinitions="200, 64" >
+                                <Image
+                                    Source="res/ph.png"/>
                                 <TextBlock
                                     Grid.Row="1"
-                                    TextWrapping="Wrap">
+                                    TextWrapping="Wrap" >
                                     placeholder
                                 </TextBlock>
                             </Grid>
                         </Button>
-                        <Button Margin="20" Width="200" Height="264">
+                        <Button
+                            Margin="20"
+                            Width="200"
+                            Height="264" >
                             <Grid
                                 Margin="0"
-                                RowDefinitions="200, 64">
-                                <Image Source="res/ph.png"></Image>
+                                RowDefinitions="200, 64" >
+                                <Image
+                                    Source="res/ph.png"/>
                                 <TextBlock
                                     Grid.Row="1"
-                                    TextWrapping="Wrap">
+                                    TextWrapping="Wrap" >
                                     placeholder
                                 </TextBlock>
                             </Grid>
@@ -326,21 +669,22 @@
             </TabItem>
         </TabControl>
         <Grid
+            IsVisible="{Binding #SidebarToggle.IsChecked}"
+            Width="300"
             RowDefinitions="32, *"
             Grid.Column="1"
-            Grid.Row="1">
+            Grid.Row="1" >
             <TextBlock
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Text="Holding history"
-                ></TextBlock>
-            <ListBox 
+                Text="Holding history"/>
+            <ListBox
                 Name="HistoryBox"
-                Grid.Row="1">
+                Grid.Row="1" >
                 <ListBoxItem>
                     Empty
                 </ListBoxItem>
-            </ListBox>            
+            </ListBox>
         </Grid>
     </Grid>
 </Window>
