@@ -9,6 +9,8 @@
 - [x] user profiles
 - [x] liquid tracker
 - [x] hold history
+- [x] somewhat not default ui
+- [x] better controls
 - [ ] databases of tasks and punishments
 - [ ] admin/dom profiles with the ability to edit conditions
 - [ ] security for admin/dom profiles
