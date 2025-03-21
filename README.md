@@ -9,13 +9,15 @@
 - [x] user profiles
 - [x] liquid tracker
 - [x] hold history
+- [x] somewhat not default ui
+- [x] better controls
 - [ ] databases of tasks and punishments
 - [ ] admin/dom profiles with the ability to edit conditions
 - [ ] security for admin/dom profiles
 - [ ] p2p connection for local connection or through VPN (like minecraft servers, radminvpn, hamachi, etc)
 - [ ] android app with desktop sync via local network/vpn/bluetooth
 - [ ] inbuilt p2p connection without additional app (for tech savvy and won't work on every machine)
-### - [ ] singleplayer games:
+### - [ ] broadcastleplayer games:
 - [ ] simple premade challenges 
 - [ ] challenge creator / challenge sharing via broadcastle file
 - [ ] some games based on dice
@@ -28,6 +30,11 @@
 - [ ] some games based on dice
 - [ ] some games based on logic
 - [ ] games based on random
+## screenshots
+![image](https://github.com/user-attachments/assets/9691d9b5-11a1-41ac-a682-b6c5407b9d9d)
+![image](https://github.com/user-attachments/assets/b9db13d3-3a31-4176-b7c4-af1455c54408)
+
+
 
 ## online
 this app WILL NOT have a server because:
