@@ -3,6 +3,12 @@ using Avalonia.Media.Imaging;
 
 namespace omo_tracker;
 
+public enum Status {
+    SUCESS,
+    FAILURE,
+    STATUSUPDATE,
+    FUCK
+}
 public class History {
     public int water;
     public int nonwater;

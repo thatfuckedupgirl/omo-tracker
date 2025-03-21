@@ -1,4 +1,7 @@
-﻿using Avalonia;
+﻿global using static omo_tracker.Stopwatch;
+global using static omo_tracker.DataIO;
+global using static omo_tracker.Status;
+using Avalonia;
 using System;
 
 namespace omo_tracker;

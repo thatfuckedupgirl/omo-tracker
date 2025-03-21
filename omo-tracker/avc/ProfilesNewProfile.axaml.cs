@@ -127,10 +127,10 @@ public partial class ProfilesNewProfile : Window {
                                                                     desktop.Shutdown();
                                                                 }
                                                         });
-        }
+        } 
         if (!manual) {
             manual = true;
-            Close((new List<Profile>(), -99));
+            Button_OnClick(null, new RoutedEventArgs());
             e.Cancel = true;
         }
     }
@@ -139,7 +139,6 @@ public partial class ProfilesNewProfile : Window {
             return;   
         }
         if (profiles == null) {
-            DataIO.PrintDebug("profiles null");
             return;
         }
         if (ind < 0 ) {
@@ -154,7 +153,6 @@ public partial class ProfilesNewProfile : Window {
             profiles[ind].size = int.Parse(SzTextBox.Text??"1000");
         } else {
             profilesbox.SelectedIndex = 1;
-            DataIO.PrintDebug("out of bounds list");
         }
     }
     private async void Delete_OnClick(object? sender, RoutedEventArgs e) {

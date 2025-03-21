@@ -525,29 +525,22 @@
                             <Border
                                 BoxShadow="inset -2 2 10 0 #202010"
                             >
-                                <TextBlock
-                                    FontSize="64"
+                                <ToggleSwitch
+                                    Name="debugswitch"
+                                    IsCheckedChanged="ToggleButton_OnIsCheckedChanged"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                >
-                                    [WIP]
-                                </TextBlock>
+                                    >
+                                    Debug mode
+                                </ToggleSwitch>
                             </Border>
                         </Border>
                     </Border>
                 </Grid>
             </TabItem>
             <TabItem
-                IsEnabled="False"
+                IsEnabled="True"
                 Header="Singleplayer games" >
-                <Grid
-                    ShowGridLines="False"
-                    RowDefinitions="*, *, *, *, *"
-                    ColumnDefinitions="*, *, *, *, *"/>
-            </TabItem>
-            <TabItem
-                IsEnabled="False"
-                Header="Multiplayer games" >
                 <ScrollViewer
                     HorizontalScrollBarVisibility="Disabled"
                     VerticalScrollBarVisibility="Auto" >
@@ -666,6 +659,11 @@
                         </Button>
                     </WrapPanel>
                 </ScrollViewer>
+            </TabItem>
+            <TabItem
+                IsEnabled="False"
+                Header="Multiplayer games" >
+
             </TabItem>
         </TabControl>
         <Grid

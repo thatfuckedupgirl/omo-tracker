@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
@@ -22,8 +24,8 @@ public partial class MainWindow : Window {
         AsH.RequestProfileUiUpdateAsh += SufficeProfileUiUpdateAsh;
         AsH.RequestUiUpdateAsH += SufficeUiUpdate;
         AsH.RequestHistoryUiUpdateAsh += SufficeHistoryUiUpdate;
-        MainHoldng.RequestUiUpdateMainHolding += SufficeUiUpdate;
-        MainHoldng.RequestHistoryUiMainHolding += SufficeHistoryUiUpdate;
+        MainHolding.RequestUiUpdateMainHolding += SufficeUiUpdate;
+        MainHolding.RequestHistoryUiMainHolding += SufficeHistoryUiUpdate;
         Profile.RequestUiUpdateProfile += SufficeUiUpdate;
         HoldData.RequestUiUpdateHoldData += SufficeUiUpdate;
     }
@@ -37,6 +39,7 @@ public partial class MainWindow : Window {
     private void TopLevel_OnOpened(object? sender, EventArgs e) {
         Console.WriteLine(sender);
         Console.WriteLine(e);
+        debugswitch.IsChecked = File.Exists("debug");
         Task.Run(()=>AsH.Setup());
     }
     private void SufficeProfileUiUpdateAsh(object? sender, EventArgs e) {
@@ -147,5 +150,14 @@ public partial class MainWindow : Window {
     }
     private void LeakButton_OnClick(object? sender, RoutedEventArgs e) {
         Task.Run(() => AsH._mainHoldng?.profile_.Leak(ToLeak));
+    }
+    private void ToggleButton_OnIsCheckedChanged(object? sender, RoutedEventArgs e) {
+        if ((sender as ToggleButton).IsChecked == true) {
+            File.WriteAllText("debug", "debug");
+            IsDebug = true;
+        } else {
+            File.Delete("debug");
+            IsDebug = false;
+        }
     }
 }
